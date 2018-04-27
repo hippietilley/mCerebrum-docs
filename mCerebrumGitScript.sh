@@ -19,7 +19,6 @@ git clone https://github.com/MD2Korg/mCerebrum-Plotter
 git clone https://github.com/MD2Korg/mCerebrum-EasySense
 git clone https://github.com/MD2Korg/mCerebrum-SelfReport
 git clone https://github.com/MD2Korg/mCerebrum-MotionSense
-git clone https://github.com/MD2Korg/mCerebrum-Configuration
 git clone https://github.com/MD2Korg/mCerebrum-MicrosoftBand
 git clone https://github.com/MD2Korg/mCerebrum-docs
 git clone https://github.com/MD2Korg/mCerebrum-Medication
