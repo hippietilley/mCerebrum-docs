@@ -1,0 +1,112 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.22.1'
+        classpath 'me.tatarka:gradle-retrolambda:3.3.1'
+    }
+}
+version = '0.1.4'
+apply from: 'versioning.gradle'
+
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply plugin: 'me.tatarka.retrolambda'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+
+def store_file = "keystore_missing"
+if (hasProperty('MD2K_RELEASE_STORE_FILE')) {
+    store_file = MD2K_RELEASE_STORE_FILE
+} else if (System.getenv('MD2K_RELEASE_STORE_FILE')) {
+    store_file = System.getenv('MD2K_RELEASE_STORE_FILE')
+} else {
+    println "ERROR: " + store_file
+}
+
+def store_password = "keystore_password_missing"
+if (hasProperty('MD2K_RELEASE_STORE_PASSWORD')) {
+    store_password = MD2K_RELEASE_STORE_PASSWORD
+} else if (System.getenv('MD2K_RELEASE_STORE_PASSWORD')) {
+    store_password = System.getenv('MD2K_RELEASE_STORE_PASSWORD')
+} else {
+    println "ERROR: " + store_password
+}
+
+
+def key_alias = "release_key_alias_missing"
+if (hasProperty('MD2K_RELEASE_KEY_ALIAS')) {
+    key_alias = MD2K_RELEASE_KEY_ALIAS
+} else if (System.getenv('MD2K_RELEASE_KEY_ALIAS')) {
+    key_alias = System.getenv('MD2K_RELEASE_KEY_ALIAS')
+} else {
+    println "ERROR: " + key_alias
+}
+
+def key_password = "release_key_password_missing"
+if (hasProperty('MD2K_RELEASE_KEY_PASSWORD')) {
+    key_password = MD2K_RELEASE_KEY_PASSWORD
+} else if (System.getenv('MD2K_RELEASE_KEY_PASSWORD')) {
+    key_password = System.getenv('MD2K_RELEASE_KEY_PASSWORD')
+} else {
+    println "ERROR: " + key_password
+}
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
+    defaultConfig {
+        applicationId "org.md2k.easysense"
+        minSdkVersion 19
+        targetSdkVersion 25
+        versionName version
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+
+    }
+    signingConfigs {
+        release {
+
+            storeFile file(store_file)
+            storePassword store_password
+            keyAlias key_alias
+            keyPassword key_password
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig getSigningConfig()
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${variant.name}-${variant.versionName}.apk"
+                }
+            }
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':datakitapi')
+    compile project(':utilities')
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.github.paolorotolo:appintro:4.0.0'
+    compile 'com.github.lzyzsd:circleprogress:1.1.0@aar'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') {
+        transitive = true;
+    }
+    compile "com.polidea.rxandroidble:rxandroidble:1.1.0"
+}
