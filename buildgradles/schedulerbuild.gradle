@@ -44,16 +44,13 @@ if ( hasProperty('MD2K_RELEASE_KEY_PASSWORD') ) {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId 'org.md2k.scheduler'
         minSdkVersion 19
         targetSdkVersion 25
         versionCode buildVersionCode()
         versionName version
-        jackOptions {
-            enabled true
-        }
+        
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     signingConfigs {

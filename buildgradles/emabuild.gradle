@@ -21,7 +21,7 @@ android {
     signingConfigs {
     }
     compileSdkVersion 25
-    buildToolsVersion '25.0.3'
+    
     defaultConfig {
         applicationId "org.md2k.ema"
         minSdkVersion 19

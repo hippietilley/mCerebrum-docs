@@ -124,4 +124,6 @@ gradle build
 
 # Generate the JavaDocs
 mkdir docs
-javadoc -d docs -bootclasspath /home/tilley/Android/Sdk/platforms/android-27/android.jar -Xdoclint:none
+cd ../
+#javadoc -d docs -sourcepath autosenseble autosenseble beacon commons core datakitapi datakit app easysense ema_scheduler EMA medication mindfulnessstrategy moodsurfing motionsense NotificationManager omron oralb phonesensor plotter scheduler selfreport streamprocessor studymperf system thoughtshakeup utilities
+javadoc -d mCerebrum-docs/docs org.md2k.demoapp #com.md2k.autosenseble autosenseble beacon commons core datakitapi datakit app easysense ema_scheduler EMA medication mindfulnessstrategy moodsurfing motionsense NotificationManager omron oralb phonesensor plotter scheduler selfreport streamprocessor studymperf system thoughtshakeup utilities

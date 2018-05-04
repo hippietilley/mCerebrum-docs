@@ -57,7 +57,7 @@ if ( hasProperty('MD2K_RELEASE_KEY_PASSWORD') ) {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    
     defaultConfig {
         applicationId "org.md2k.streamprocessor"
         minSdkVersion 19
@@ -111,11 +111,11 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:25.1.1'
-    compile project(':datakitapi')
-    compile project(':streamprocessor')
-    compile project(':core')
-    compile project(':commons')
-    compile project(":utilities")
+    compile project(path: ':datakitapi', configuration: 'default')
+    compile project(path: ':streamprocessor', configuration: 'default')
+    compile project(path: ':core', configuration: 'default')
+    compile project(path: ':commons', configuration: 'default')
+    compile project(path: ':utilities', configuration: 'default')
     compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
         transitive = true;
     }
