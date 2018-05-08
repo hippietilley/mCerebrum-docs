@@ -1,0 +1,104 @@
+version = '1.2.1'
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+apply from: 'versioning.gradle'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+def store_file = "keystore_missing"
+if ( hasProperty('MD2K_RELEASE_STORE_FILE') ) {
+    store_file = MD2K_RELEASE_STORE_FILE
+} else if ( System.getenv('MD2K_RELEASE_STORE_FILE') ){
+    store_file = System.getenv('MD2K_RELEASE_STORE_FILE')
+} else {
+    println "ERROR: " + store_file
+}
+
+def store_password = "keystore_password_missing"
+if ( hasProperty('MD2K_RELEASE_STORE_PASSWORD') ) {
+    store_password = MD2K_RELEASE_STORE_PASSWORD
+} else if ( System.getenv('MD2K_RELEASE_STORE_PASSWORD') ){
+    store_password = System.getenv('MD2K_RELEASE_STORE_PASSWORD')
+} else {
+    println "ERROR: " + store_password
+}
+
+
+def key_alias = "release_key_alias_missing"
+if ( hasProperty('MD2K_RELEASE_KEY_ALIAS') ) {
+    key_alias = MD2K_RELEASE_KEY_ALIAS
+} else if ( System.getenv('MD2K_RELEASE_KEY_ALIAS') ){
+    key_alias = System.getenv('MD2K_RELEASE_KEY_ALIAS')
+} else {
+    println "ERROR: " + key_alias
+}
+
+def key_password = "release_key_password_missing"
+if ( hasProperty('MD2K_RELEASE_KEY_PASSWORD') ) {
+    key_password = MD2K_RELEASE_KEY_PASSWORD
+} else if ( System.getenv('MD2K_RELEASE_KEY_PASSWORD') ){
+    key_password = System.getenv('MD2K_RELEASE_KEY_PASSWORD')
+} else {
+    println "ERROR: " + key_password
+}
+
+
+android {
+    compileSdkVersion 23
+    
+    defaultConfig {
+        applicationId "org.md2k.plotter"
+        minSdkVersion 19
+        targetSdkVersion 21
+        versionCode buildVersionCode()
+        versionName version
+    }
+    signingConfigs {
+        release {
+
+            storeFile file(store_file)
+            storePassword store_password
+            keyAlias key_alias
+            keyPassword key_password
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+            applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${variant.name}-${variant.versionName}.apk"
+                }
+            }
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':datakitapi')
+    compile project(':utilities')
+    compile files('libs/androidplot-core-0.6.1.jar')
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile('com.crashlytics.sdk.android:crashlytics:2.6.1@aar') {
+        transitive = true;
+    }
+}
