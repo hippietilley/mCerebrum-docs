@@ -1,1 +1,58 @@
 include ':app'
+
+include ':autosense'
+include ':autosenseble'
+include ':beacon'
+include ':commons'
+include ':core'
+include ':datakit'
+include ':datakitapi'
+include ':demoapp'
+include ':easysense'
+include ':ema'
+include ':ema_scheduler'
+include ':medication'
+include ':mindfulnessstrategy'
+include ':moodsurfing'
+include ':motionsense'
+include ':notificationmanager'
+include ':omron'
+include ':oralb-app'
+include ':phonesensor'
+include ':plotter'
+include ':scheduler'
+include ':selfreport'
+include ':streamprocessor'
+include ':studymperf'
+include ':system'
+include ':thoughtshakeup'
+include ':utilities'
+
+
+project(':autosense').projectDir = new File('../mCerebrum-AutoSense/autosense')
+project(':autosenseble').projectDir = new File('../mCerebrum-AutoSenseBLE/autosenseble')
+project(':beacon').projectDir = new File('../mCerebrum-Beacon/beacon')
+project(':commons').projectDir = new File('../mCerebrum-Library/commons')
+project(':core').projectDir = new File('../mCerebrum-Library/core')
+project(':datakit').projectDir = new File('../mCerebrum-DataKit/datakit')
+project(':datakitapi').projectDir = new File('../mCerebrum-DataKitAPI/datakitapi')
+project(':demoapp').projectDir = new File('../mCerebrum-DemoApp/app')
+project(':easysense').projectDir = new File('../mCerebrum-EasySense/easysense')
+project(':ema_scheduler').projectDir = new File('../mCerebrum-EMAScheduler')
+project(':ema').projectDir = new File('../mCerebrum-EMA/EMA')
+project(':medication').projectDir = new File('../mCerebrum-Medication/medication')
+project(':mindfulnessstrategy').projectDir = new File('../mCerebrum-MindfulnessStrategy')
+project(':moodsurfing').projectDir = new File('../mCerebrum-MoodSurfing')
+project(':motionsense').projectDir = new File('../mCerebrum-MotionSense')
+project(':notificationmanager').projectDir = new File('../mCerebrum-NotificationManager')
+project(':omron').projectDir = new File('../mCerebrum-Omron')
+project(':oralb-app').projectDir = new File('../mCerebrum-OralB')
+project(':phonesensor').projectDir = new File('../mCerebrum-PhoneSensor/phonesensor')
+project(':plotter').projectDir = new File('../mCerebrum-Plotter/plotter')
+project(':scheduler').projectDir = new File('../mCerebrum-Scheduler/scheduler')
+project(':selfreport').projectDir = new File('../mCerebrum-SelfReport/selfreport')
+project(':streamprocessor').projectDir = new File('../mCerebrum-StreamProcessor/streamprocessor')
+project(':studymperf').projectDir = new File('../mCerebrum-StudymPerf')
+project(':system').projectDir = new File('../mCerebrum-Library/system')
+project(':thoughtshakeup').projectDir = new File('../mCerebrum-ThoughtShakeup')
+project(':utilities').projectDir = new File('../mCerebrum-Utilities/utilities')
